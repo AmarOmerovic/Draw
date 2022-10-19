@@ -27,12 +27,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="8dp"
-            android:background="@color/white"
-            android:src="@drawable/brush"
-            android:backgroundTint="@color/themeColorTwo"
-            android:minHeight="70dp"
+            android:backgroundTint="@color/themeColorOne"
+            android:contentDescription="@string/brush_size_dialog_opener"
             android:minWidth="70dp"
-            android:contentDescription="@string/brush_size_dialog_opener" />
+            android:minHeight="70dp"
+            android:src="@drawable/resize" />
 
         <ImageButton
             android:id="@+id/brushColor"
@@ -42,8 +41,7 @@
             android:minHeight="70dp"
             android:layout_gravity="center"
             android:layout_margin="8dp"
-            android:backgroundTint="@color/themeColorTwo"
-            android:background="@color/white"
+            android:backgroundTint="@color/themeColorOne"
             android:src="@drawable/paint"
             android:contentDescription="@string/brush_size_dialog_opener" />
 

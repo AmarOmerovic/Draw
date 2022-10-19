@@ -12,5 +12,12 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="actionBarTheme">@style/AppTheme</item>
     </style>
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
+        <item name="colorPrimary">@color/themeColorTwo</item>
+        <item name="android:textColorPrimary">@color/black</item>
+    </style>
+
 </resources>

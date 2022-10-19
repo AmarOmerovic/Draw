@@ -12,4 +12,5 @@
     <string name="brush_size_of_50_dp">Brush size of 50 dp</string>
     <string name="brush_size_of_1_dp">Brush size of 1 dp</string>
     <string name="brush_size_dialog_opener">Brush size dialog opener</string>
+    <string name="brush_size">Brush Size</string>
 </resources>

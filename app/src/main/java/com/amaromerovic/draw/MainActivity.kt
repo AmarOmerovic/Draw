@@ -2,6 +2,7 @@ package com.amaromerovic.draw
 
 import android.app.Dialog
 import android.os.Bundle
+import android.view.Window
 import androidx.appcompat.app.AppCompatActivity
 import com.amaromerovic.draw.databinding.ActivityMainBinding
 import com.amaromerovic.draw.databinding.BrushSizeDialogBinding
@@ -42,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         val brushSizeDialog = Dialog(this)
         val dialogBinding = BrushSizeDialogBinding.inflate(layoutInflater)
         brushSizeDialog.setContentView(dialogBinding.root)
+        brushSizeDialog.setTitle("Brush size")
         brushSizeDialog.show()
 
         dialogBinding.brushSizeOf1dp.setOnClickListener {setSizeAndHideDialog(1f, brushSizeDialog)}
