@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    app:divider="@drawable/divider"
+    app:showDividers="middle"
+    tools:context=".MainActivity">
+
+    <ImageButton
+        android:id="@+id/brushSizeOf1dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/brush_size_of_1_dp"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        android:src="@drawable/brush_size_1dp" />
+
+    <ImageButton
+        android:id="@+id/brushSizeOf5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/brush_size_of_5dp"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        android:src="@drawable/brush_size_5dp" />
+
+    <ImageButton
+        android:id="@+id/brushSizeOf10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/brush_size_of_10_dp"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        android:src="@drawable/brush_size_10dp" />
+
+    <ImageButton
+        android:id="@+id/brushSizeOf15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/brush_size_of_15_dp"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        android:src="@drawable/brush_size_15dp" />
+
+    <ImageButton
+        android:id="@+id/brushSizeOf20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/brush_size_of_20_dp"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        android:src="@drawable/brush_size_20dp" />
+
+    <ImageButton
+        android:id="@+id/brushSizeOf25dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/brush_size_of_25_dp"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        android:src="@drawable/brush_size_25dp" />
+
+    <ImageButton
+        android:id="@+id/brushSizeOf30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/brush_size_of_30_dp"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        android:src="@drawable/brush_size_30dp" />
+
+    <ImageButton
+        android:id="@+id/brushSizeOf35dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/brush_size_of_35_dp"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        android:src="@drawable/brush_size_35dp" />
+
+    <ImageButton
+        android:id="@+id/brushSizeOf40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/brush_size_of_40_dp"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        android:src="@drawable/brush_size_40dp" />
+
+    <ImageButton
+        android:id="@+id/brushSizeOf45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/brush_size_of_45_dp"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        android:src="@drawable/brush_size_45dp" />
+
+    <ImageButton
+        android:id="@+id/brushSizeOf50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/brush_size_of_50_dp"
+        android:minWidth="50dp"
+        android:minHeight="50dp"
+        android:src="@drawable/brush_size_50dp" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
