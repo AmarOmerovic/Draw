@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Draw</string>
+    <string name="brush_size_of_5dp">Brush size of 5dp</string>
+    <string name="brush_size_of_10_dp">Brush size of 10 dp</string>
+    <string name="brush_size_of_15_dp">Brush size of 15 dp</string>
+    <string name="brush_size_of_20_dp">Brush size of 20 dp</string>
+    <string name="brush_size_of_25_dp">Brush size of 25 dp</string>
+    <string name="brush_size_of_30_dp">Brush size of 30 dp</string>
+    <string name="brush_size_of_35_dp">Brush size of 35 dp</string>
+    <string name="brush_size_of_40_dp">Brush size of 40 dp</string>
+    <string name="brush_size_of_45_dp">Brush size of 45 dp</string>
+    <string name="brush_size_of_50_dp">Brush size of 50 dp</string>
+    <string name="brush_size_of_1_dp">Brush size of 1 dp</string>
+    <string name="brush_size_dialog_opener">Brush size dialog opener</string>
 </resources>

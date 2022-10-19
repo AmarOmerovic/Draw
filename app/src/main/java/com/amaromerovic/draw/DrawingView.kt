@@ -3,17 +3,18 @@ package com.amaromerovic.draw
 import android.content.Context
 import android.graphics.*
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 
 class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) {
     private lateinit var drawPath: CustomPath
-    private lateinit var canvasBitmap: Bitmap
     private lateinit var drawPaint: Paint
     private lateinit var canvasPaint: Paint
+    private lateinit var canvasBitmap: Bitmap
+    private lateinit var canvas: Canvas
     private var brushSize: Float = 0.toFloat()
     private var color = Color.BLACK
-    private lateinit var canvas: Canvas
     private val paths = ArrayList<CustomPath>()
 
     init {
@@ -28,7 +29,7 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
         drawPaint.strokeJoin = Paint.Join.ROUND
         drawPaint.strokeCap = Paint.Cap.ROUND
         canvasPaint = Paint(Paint.DITHER_FLAG)
-        brushSize = 20.toFloat()
+//        brushSize = 20.toFloat()
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -81,7 +82,21 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
         return true
     }
 
-    internal inner class CustomPath(var color: Int, var brushThickness: Float) : Path() {
+    fun setBrushSize(newSize: Float) {
+        brushSize = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            newSize,
+            resources.displayMetrics
+        )
 
+        drawPaint.strokeWidth = brushSize
     }
+
+
+    fun setBrushColor(newColor: Int) {
+        color = newColor
+        drawPaint.color = color
+    }
+
+    internal inner class CustomPath(var color: Int, var brushThickness: Float) : Path()
 }
