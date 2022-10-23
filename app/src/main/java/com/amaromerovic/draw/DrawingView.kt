@@ -29,7 +29,6 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
         drawPaint.strokeJoin = Paint.Join.ROUND
         drawPaint.strokeCap = Paint.Cap.ROUND
         canvasPaint = Paint(Paint.DITHER_FLAG)
-//        brushSize = 20.toFloat()
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
@@ -65,7 +64,6 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
             MotionEvent.ACTION_DOWN -> {
                 drawPath.color = color
                 drawPath.brushThickness = brushSize
-
                 drawPath.reset()
                 drawPath.moveTo(touchX!!, touchY!!)
             }
@@ -97,6 +95,14 @@ class DrawingView(context: Context, attrs: AttributeSet) : View(context, attrs) 
         color = newColor
         drawPaint.color = color
     }
+
+    fun removeLastLine() {
+        if (paths.isNotEmpty()) {
+            paths.removeLast()
+            invalidate()
+        }
+    }
+
 
     internal inner class CustomPath(var color: Int, var brushThickness: Float) : Path()
 }

@@ -13,4 +13,10 @@
     <string name="brush_size_of_1_dp">Brush size of 1 dp</string>
     <string name="brush_size_dialog_opener">Brush size dialog opener</string>
     <string name="brush_size">Brush Size</string>
+    <string name="importedimage">importedImage</string>
+    <string name="undoButton">Undo button</string>
+    <string name="save_button">Save button</string>
+    <string name="brush_color_dialog_opener">Brush color dialog opener</string>
+    <string name="gallery_opener">Gallery opener</string>
+    <string name="please_wait">Please wait…</string>
 </resources>

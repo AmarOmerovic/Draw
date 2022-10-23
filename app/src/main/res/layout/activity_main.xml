@@ -3,17 +3,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/themeColorOne"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <com.amaromerovic.draw.DrawingView
-        android:id="@+id/drawingView"
+    <FrameLayout
+        android:id="@+id/frameLayoutContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp"
         android:layout_weight="1"
-        android:background="@drawable/drawing_view_background" />
+        android:background="@drawable/drawing_view_background">
+
+        <ImageView
+            android:id="@+id/imageViewContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="1dp"
+            android:contentDescription="@string/importedimage"
+            android:scaleType="centerCrop" />
+
+        <com.amaromerovic.draw.DrawingView
+            android:id="@+id/drawingView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
@@ -22,32 +37,57 @@
         android:orientation="horizontal">
 
         <ImageButton
+            android:id="@+id/gallery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:background="@drawable/main_button_background"
+            android:contentDescription="@string/gallery_opener"
+            android:src="@drawable/gallery" />
+
+        <ImageButton
             android:id="@+id/brushSize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="8dp"
-            android:backgroundTint="@color/themeColorOne"
+            android:background="@drawable/main_button_background"
             android:contentDescription="@string/brush_size_dialog_opener"
-            android:minWidth="70dp"
-            android:minHeight="70dp"
             android:src="@drawable/resize" />
 
         <ImageButton
             android:id="@+id/brushColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="70dp"
-            android:minHeight="70dp"
             android:layout_gravity="center"
             android:layout_margin="8dp"
-            android:backgroundTint="@color/themeColorOne"
-            android:src="@drawable/paint"
-            android:contentDescription="@string/brush_size_dialog_opener" />
+            android:background="@drawable/main_button_background"
+            android:contentDescription="@string/brush_color_dialog_opener"
+            android:src="@drawable/paint" />
+
+        <ImageButton
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:background="@drawable/main_button_background"
+            android:contentDescription="@string/save_button"
+            android:src="@drawable/save" />
+
+
+        <ImageButton
+            android:id="@+id/undo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:background="@drawable/main_button_background"
+            android:contentDescription="@string/undoButton"
+            android:src="@drawable/undo" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
-
-
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
