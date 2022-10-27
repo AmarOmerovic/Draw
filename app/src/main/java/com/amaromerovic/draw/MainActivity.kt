@@ -1,17 +1,20 @@
 package com.amaromerovic.draw
 
 import android.app.Dialog
+import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.provider.MediaStore.Images
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
 import com.amaromerovic.draw.databinding.ActivityMainBinding
 import com.amaromerovic.draw.databinding.BrushSizeDialogBinding
@@ -21,9 +24,9 @@ import com.github.dhaval2404.colorpicker.model.ColorShape
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileOutputStream
+import java.io.IOException
+import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -87,7 +90,10 @@ class MainActivity : AppCompatActivity() {
         binding.save.setOnClickListener {
             lifecycleScope.launch {
                 showCustomProgress()
-                saveBitmap(getBitmapFromView(binding.frameLayoutContainer))
+                saveBitmap(
+                    UUID.randomUUID().toString(),
+                    getBitmapFromView(binding.frameLayoutContainer)
+                )
             }
         }
 
@@ -189,43 +195,63 @@ class MainActivity : AppCompatActivity() {
         return returnedBitmap
     }
 
-    private suspend fun saveBitmap(bitmap: Bitmap?): String {
-        var result = ""
-
+    private suspend fun saveBitmap(name: String, bitmap: Bitmap?) {
         withContext(Dispatchers.IO) {
-            if (bitmap != null) {
-                try {
-                    val bytes = ByteArrayOutputStream()
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 80, bytes)
+            val image = Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
+            val contentValue = ContentValues().apply {
+                put(Images.Media.DISPLAY_NAME, "$name.jpg")
+                put(Images.Media.MIME_TYPE, "image/jpeg")
+                Log.d("TAG1234", "saveBitmap: $image")
+                if (bitmap != null) {
+                    put(Images.Media.WIDTH, bitmap.width)
+                    put(Images.Media.HEIGHT, bitmap.height)
+                }
+            }
 
-                    val file = File(
-                        externalCacheDir,
-                        "Draw_" + (System.currentTimeMillis() / 1000) + ".jpg"
-                    )
-                    val fileOutputStream = FileOutputStream(file)
-
-
-                    fileOutputStream.write(bytes.toByteArray())
-                    fileOutputStream.close()
-
-                    result = file.absolutePath
-
-                    runOnUiThread {
-                        hideCustomProgress()
-                        if (result.isNotEmpty()) {
-                            Toast.makeText(
-                                this@MainActivity,
-                                "File saved successfully: $result!",
-                                Toast.LENGTH_LONG
-                            ).show()
-                            shareImage(
-                                FileProvider.getUriForFile(
-                                    this@MainActivity,
-                                    "com.amaromerovic.draw.fileprovider",
-                                    file
-                                )
-                            )
-                        } else {
+            try {
+                contentResolver.insert(image, contentValue).also {
+                    if (it != null) {
+                        contentResolver.openOutputStream(it).use { outputStream ->
+                            if (bitmap != null) {
+                                if (!bitmap.compress(
+                                        Bitmap.CompressFormat.JPEG,
+                                        95,
+                                        outputStream
+                                    )
+                                ) {
+                                    runOnUiThread {
+                                        hideCustomProgress()
+                                        Toast.makeText(
+                                            this@MainActivity,
+                                            "Something went wrong saving the image!",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                    }
+                                } else {
+                                    runOnUiThread {
+                                        hideCustomProgress()
+                                        Toast.makeText(
+                                            this@MainActivity,
+                                            "Image saved successfully!",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                        shareImage(it)
+                                    }
+                                }
+                            } else {
+                                runOnUiThread {
+                                    hideCustomProgress()
+                                    Toast.makeText(
+                                        this@MainActivity,
+                                        "Something went wrong saving the image!",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
+                            }
+                        }
+                    } else {
+                        runOnUiThread {
+                            hideCustomProgress()
                             Toast.makeText(
                                 this@MainActivity,
                                 "Something went wrong saving the image!",
@@ -233,9 +259,7 @@ class MainActivity : AppCompatActivity() {
                             ).show()
                         }
                     }
-                } catch (e: java.lang.Exception) {
-                    result = ""
-                    e.printStackTrace()
+                } ?: run {
                     runOnUiThread {
                         hideCustomProgress()
                         Toast.makeText(
@@ -245,11 +269,19 @@ class MainActivity : AppCompatActivity() {
                         ).show()
                     }
                 }
+            } catch (e: IOException) {
+                e.printStackTrace()
+                runOnUiThread {
+                    hideCustomProgress()
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Something went wrong saving the image!",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
             }
         }
-        return result
     }
-
 
     private fun showCustomProgress() {
         progressDialog = Dialog(this@MainActivity)
@@ -266,7 +298,7 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent()
         intent.action = Intent.ACTION_SEND
         intent.putExtra(Intent.EXTRA_STREAM, uri)
-        intent.type = "image/jpeg"
+        intent.type = "image/*"
         startActivity(Intent.createChooser(intent, "Share image via "))
     }
 }
